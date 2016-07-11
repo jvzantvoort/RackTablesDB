@@ -33,7 +33,7 @@ class Object(object):
           obj.`asset_no`,
           obj.`has_problems`,
           obj.`comment`,
-          dict.`dict_value`
+          dict.`dict_value` as object_type
         FROM `Object` obj
         LEFT OUTER JOIN `Dictionary` dict
         ON
@@ -46,7 +46,7 @@ class Object(object):
 
           obj = RackTablesDB.objects.Object()
 
-          for row in obj._where(dict_value = 'Server'):
+          for row in obj._where(object_type = 'Server'):
                print row['id'], row['name']
 
         :param kwargs: where clause items
@@ -120,7 +120,7 @@ class Rack(Object):
 
     def __init__(self):
         super(Rack, self).__init__()
-        self.base_query += " WHERE dict_value = \"Rack\""
+        self.base_query += " WHERE object_type = \"Rack\""
 
     def list(self):
         return self._db.query(self.base_query)
