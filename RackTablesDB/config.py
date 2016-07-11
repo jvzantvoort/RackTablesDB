@@ -77,3 +77,17 @@ class Config(object):
 
         return self.name
 
+    @property
+    def host(self):
+        """return database host"""
+        if 'host' in self.database:
+            return self.database['host']
+
+        if self.has_been_read:
+            # default to localhost
+            self.database['host'] = 'localhost'
+
+        self.read()
+
+        return self.host
+
